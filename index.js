@@ -2,6 +2,7 @@
 const express = require("express");
 const app = express();
 const taskRoute = require("./routes/tasks");
+const itemRoute = require("./routes/items");
 const connectDB = require("./db/connect");
 const fs = require("fs");
 const https = require("https");
@@ -18,6 +19,7 @@ app.set("port", process.env.PORT || 3000);
 
 // task api routing settings
 app.use("/api/v1/tasks", taskRoute);
+app.use("/api/v1/items", itemRoute);
 
 /* const start = async () => {
     try {
