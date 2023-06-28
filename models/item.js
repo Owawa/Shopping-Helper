@@ -17,19 +17,6 @@ const itemSchema = new mongoose.Schema({
     required: true,
     min: 0,
   },
-  lastPurchasedDate: {
-    type: Date,
-    default: Date.now,
-  },
-  consumptionRate: { // beta
-    type: Number,
-    required: false,
-    min: 0,
-  },
-  nextPurchaseDate: { // beta
-    type: Date,
-    required: false,
-  }
 });
 
 module.exports = mongoose.model('Item', itemSchema);

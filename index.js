@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const taskRoute = require("./routes/tasks");
 const itemRoute = require("./routes/items");
+const purchaseRoute = require("./routes/purchaseRecords");
 const connectDB = require("./db/connect");
 const fs = require("fs");
 const https = require("https");
@@ -17,9 +18,10 @@ app.use(express.json());
 app.use(express.static("public"));
 app.set("port", process.env.PORT || 3000);
 
-// task api routing settings
+// api routing settings
 app.use("/api/v1/tasks", taskRoute);
 app.use("/api/v1/items", itemRoute);
+app.use("/api/v1/purchase", purchaseRoute);
 
 /* const start = async () => {
     try {
