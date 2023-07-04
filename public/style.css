@@ -72,6 +72,75 @@ body {
 }
 
 /*************
+    ダッシュボード
+*************/
+.dashboard {
+  width: 90vw;
+  max-width: var(--fixed-width);
+  margin: 0 auto;
+  margin-top: 6rem;
+  background: var(--white);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--shadow-2);
+  padding: 2rem 2.5rem;
+}
+
+.dashboard h4 {
+  font-size: 1.4rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.item-alert {
+  color: var(--red-dark);
+  letter-spacing: var(--letterSpacing);
+  text-transform: capitalize;
+}
+
+.dashboard .item-alert {
+  margin-top: 1rem;
+}
+
+/*******
+  links
+*******/
+.links-container {
+  width: 90vw;
+  max-width: var(--fixed-width);
+  margin: 0 auto;
+  margin-top: 1.2rem;
+  padding-bottom: 4rem;
+  text-align: center;
+}
+
+.links {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+
+  gap: 1rem;
+}
+
+.single-link {
+  flex: 1 auto;
+
+  background: var(--white);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--shadow-2);
+  transition: var(--transition);
+  
+  display: flex;
+  justify-content: center;
+}
+
+.single-link a {
+  padding: 20px 0;
+
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+/*************
     フォーム
 *************/
 form {
@@ -92,45 +161,10 @@ textarea {
   border: 1px solid var(--grey-300);
 }
 
-.form-alert {
-  color: var(--red-dark);
-  letter-spacing: var(--letterSpacing);
-  text-transform: capitalize;
-}
-
-.task-form,
-.single-task-form {
-  width: 90vw;
-  max-width: var(--fixed-width);
-  margin: 0 auto;
-  margin-top: 6rem;
-}
-.task-form h4 {
-  font-size: 1.4rem;
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.task-form .form-alert {
-  margin-top: 1rem;
-}
-
-.submit-btn {
-  width: 20%;
-  min-width: max-content;
-  margin-top: 1rem;
-  margin-left: 50%;
-  transform: translateX(-50%);
-}
-
 /*************
-    タスク
+    Items (後で内容一新)
 *************/
-.loading-text {
-  visibility: hidden;
-}
-
-.tasks-container {
+.items-container {
   width: 100%;
   width: 90vw;
   max-width: var(--fixed-width);
@@ -139,48 +173,39 @@ textarea {
   padding-bottom: 4rem;
 }
 
-.tasks {
-  display: grid;
+.items {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
   gap: 1rem;
 }
-.single-task {
+.single-item {
+  display: flex;
+
   padding: 0.5rem 1.5rem;
   background: var(--white);
   border-radius: var(--borderRadius);
   box-shadow: var(--shadow-2);
   transition: var(--transition);
-  display: flex;
+  
   justify-content: space-between;
   align-items: center;
 }
 
-.single-task:hover {
+.single-item:hover {
   box-shadow: var(--shadow-4);
 }
 
-.single-task h5 {
+.single-item h5 {
   margin-bottom: 0;
 }
 
-.single-task span {
-  display: inline-block;
-  width: 0.5rem;
-  height: 0.5rem;
-  margin-left: -1.25rem;
-  margin-right: 1.5rem;
+.quantity {
+  display: flex;  
 }
 
-.single-task .fa-circle-check {
-  font-size: 1.5rem;
-  color: var(--green-dark);
-  visibility: hidden;
-}
-
-.task-completed h5 {
-  text-decoration: line-through;
-}
-.task-completed .fa-circle-check {
-  visibility: visible;
+.shortage{
+  color: var(--red-dark);
 }
 
 /* Task Links */
@@ -211,22 +236,22 @@ textarea {
   width: auto;
 }
 
-.single-task-form .form-alert {
+.single-item-form .form-alert {
   text-align: center;
   margin-top: 1rem;
 }
 
-.single-task-form h4 {
+.single-item-form h4 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.single-task-form p {
+.single-item-form p {
   margin-bottom: 0;
   margin-top: 0;
 }
 
-.single-task-form .form-control {
+.single-item-form .form-control {
   display: grid;
   grid-template-columns: 100px 1fr;
   align-items: center;

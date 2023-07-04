@@ -15,18 +15,35 @@
     <link rel="apple-touch-icon" sizes="144x144" href="/favicon.ico">
 </head>
 <body>
-    <form class="task-form">
+    <div class="dashboard">
         <h4>ヤドンの買い物ヘルパー</h4>
-        <div class="form-control"> 
-            <input type="text" name="name" class="task-input" placeholder="例：柔軟剤"/>
-            <button type="submit" class="btn submit-btn">消費財を登録</button>
+        <div class="item-alert"> 
+            Some alert here...
         </div>
-        <div class="form-alert"></div>
-    </form>
+    </div>
 
-    <section class="tasks-container">
-        <div class="tasks"></div>
-    </section>
+    <section class="links-container">
+        <div class="links">
+            <div class="single-link">
+                <a href="stock.html">
+                    <i class="fa-solid fa-box-archive fa-2xl" style="color: #e5e6a8;"></i>
+                    <p>Stock</p>              
+                </a>
+            </div>
+            <div class="single-link">
+                <a href="shopping.html">
+                    <i class="fa-solid fa-cart-shopping fa-2xl" style="color: #f8cdf9;"></i>
+                    <p>Shopping</p>
+                </a>
+            </div>
+            <div class="single-link">
+                <a href="admin.html">
+                    <i class="fa-solid fa-screwdriver-wrench fa-2xl" style="color: #082f6d;"></i>
+                    <p>Admin</p>
+                </a>
+            </div>
+        </div>
+    </section>    
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
 </body>
