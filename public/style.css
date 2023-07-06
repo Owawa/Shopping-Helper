@@ -200,12 +200,28 @@ textarea {
   margin-bottom: 0;
 }
 
-.quantity {
-  display: flex;  
+.quantity-ctl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.shortage{
+.quantity {
+  border: 1px solid var(--grey-300);
+}
+
+.shortage {
   color: var(--red-dark);
+}
+
+/* plus/minus btn */
+.plus {
+  width: 30px;
+}
+
+.minus {
+  width: 30px;
+
 }
 
 /* Task Links */
