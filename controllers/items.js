@@ -49,7 +49,10 @@ const updateItem = async (req, res) => {
         const updateItem = await Item.findOneAndUpdate(
             { _id: req.params.id }, 
             req.body,
-            { new: true }
+            { 
+                new: true,
+                runValidators: true
+            }
         );
         if(!updateItem) {
             return res.status(404).json(`_id:${req.params.id}は存在しません`);
