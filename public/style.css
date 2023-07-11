@@ -11,24 +11,31 @@
   --grey-300: #dbe0ea;
   --grey-1000: #333538;
 
-  /* 残り */
   --black: #222;
   --white: #fff;
+  
   --red-dark: #ce242f;
+  --deep-pink: #f58282;
+  --pink: #ffe6e6;
+  
   --green-dark: #1d926b;
 
   /* typography */
   --headingFont: "Inconsolata", monospace;
   --bodyFont: "Montserrat", sans-serif;
   --smallText: 0.7em;
-  /* 残り */
+  
+  
+  --alertBorderColor: var(--deep-pink);
   --backgroundColor: var(--grey-50);
+  --backgroundColorAlert: var(--pink);
   --textColor: var(--grey-1000);
   --borderRadius: 0.25rem;
   --letterSpacing: 1px;
   --transition: 0.3s ease-in-out all;
   --max-width: 1120px;
   --fixed-width: 600px;
+  
   /* box-shadow */
   --shadow-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   --shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
@@ -91,18 +98,22 @@ body {
   margin-bottom: 1rem;
 }
 
-.item-alert {
+.alert-box {
+  display: none;
+  background-color: var(--backgroundColorAlert);
   color: var(--red-dark);
+  border-left: 2px solid var(--alertBorderColor);
+  padding: 5px;  
   letter-spacing: var(--letterSpacing);
   text-transform: capitalize;
 }
 
-.dashboard .item-alert {
-  margin-top: 1rem;
+.alert-item {
+  list-style: none;
 }
 
 /*******
-  links
+  TOP links
 *******/
 .links-container {
   width: 90vw;
@@ -162,7 +173,7 @@ textarea {
 }
 
 /*************
-    Items (後で内容一新)
+    Items
 *************/
 .items-container {
   width: 100%;
@@ -207,21 +218,43 @@ textarea {
 }
 
 .quantity {
+  display: block;
+  width: 44px;
+  height: 44px;
   border: 1px solid var(--grey-300);
+  background: var(--backgroundColor);
+
+  text-align: center;
+  line-height: 44px;
 }
 
-.shortage {
+.quantity-btn {
+  appearance: none;
+  border: 1px solid var(--grey-300);
+  font-size: 20px;
+}
+
+.shortage.single-item{
+  background: var(--backgroundColorAlert);
+}
+
+.shortage span{
   color: var(--red-dark);
 }
 
 /* plus/minus btn */
 .plus {
-  width: 30px;
+  width: 44px;
+  height: 44px;
+
+  border-radius: 0 10px 10px 0;
 }
 
 .minus {
-  width: 30px;
+  width: 44px;
+  height: 44px;
 
+  border-radius: 10px 0 0 10px;
 }
 
 /* Task Links */
