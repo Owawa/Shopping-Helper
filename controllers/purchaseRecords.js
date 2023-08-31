@@ -1,9 +1,22 @@
 const PurchaseRecord = require("../models/purchaseRecord");
 
+const getAllRawPurchaseRecords = async (req, res) => {
+    try {
+        const rawRecords = await PurchaseRecord.find({});
+        res.status(200).json(rawRecords);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+};
+
 const getAllPurchaseRecords = async (req, res) => {
     try {
-        const allPurchaseRecords = await PurchaseRecord.find({});
-        res.status(200).json(allPurchaseRecords);
+        const populatedRecords = await PurchaseRecord.find({})
+        .sort({ purchasedDate: 'desc'})
+        .populate("item", "name")
+        .exec();
+
+        res.status(200).json(populatedRecords);
     } catch (err) {
         res.status(500).json(err);
     }
@@ -56,5 +69,6 @@ module.exports = {
     getAllPurchaseRecords,
     createPurchaseRecord,
     updatePurchaseRecord,
-    deletePurchaseRecord
+    deletePurchaseRecord,
+    getAllRawPurchaseRecords
 };

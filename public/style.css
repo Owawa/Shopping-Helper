@@ -17,8 +17,9 @@
   --red-dark: #ce242f;
   --deep-pink: #f58282;
   --pink: #ffe6e6;
-  
   --green-dark: #1d926b;
+  --blue: #5bb0e9;
+
 
   /* typography */
   --headingFont: "Inconsolata", monospace;
@@ -77,6 +78,48 @@ body {
   background: var(--primary-400);
   box-shadow: var(--shadow-2);
 }
+
+.submit-btn {
+  width: 20%;
+  min-width: max-content;
+  margin-top: 1rem;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+/*************
+    フォーム
+*************/
+form {
+  width: 100%;
+  background: var(--white);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--shadow-2);
+  padding: 2rem 2.5rem;
+}
+
+/*
+input,
+textarea {
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--borderRadius);
+  background: var(--grey-50);
+  border-color: transparent;
+  border: 1px solid var(--grey-300);
+}
+*/
+
+input,
+textarea {
+  width: 100%;
+  border-radius: var(--borderRadius);
+  background: var(--grey-50);
+  border-color: transparent;
+  border: 1px solid var(--grey-300);
+  padding: 0.375rem 0.75rem;
+}
+
 
 /*************
     ダッシュボード
@@ -151,26 +194,6 @@ body {
   text-decoration: none;
   color: inherit;
 }
-/*************
-    フォーム
-*************/
-form {
-  width: 100%;
-  background: var(--white);
-  border-radius: var(--borderRadius);
-  box-shadow: var(--shadow-2);
-  padding: 2rem 2.5rem;
-}
-
-input,
-textarea {
-  width: 100%;
-  padding: 0.375rem 0.75rem;
-  border-radius: var(--borderRadius);
-  background: var(--grey-50);
-  border-color: transparent;
-  border: 1px solid var(--grey-300);
-}
 
 /*************
     Items
@@ -230,6 +253,7 @@ textarea {
 
 .quantity-btn {
   appearance: none;
+  cursor: pointer;
   border: 1px solid var(--grey-300);
   font-size: 20px;
 }
@@ -242,20 +266,114 @@ textarea {
   color: var(--red-dark);
 }
 
-/* plus/minus btn */
+/* plus minus btn */
 .plus {
   width: 44px;
   height: 44px;
-
   border-radius: 0 10px 10px 0;
 }
 
 .minus {
   width: 44px;
   height: 44px;
-
   border-radius: 10px 0 0 10px;
 }
+
+/*****
+  Purchase Records
+*****/
+
+/* for record registration */
+.purchase-record-form {
+  width: 90vw;
+  max-width: var(--fixed-width);
+  margin: 0 auto;
+  margin-top: 6rem;
+  background: var(--white);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--shadow-2);
+  padding: 2rem 2.5rem;
+}
+
+.purchase-record-form h4 {
+  font-size: 1.4rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.purchase-record-form label {
+  display: block;
+  width: 100%;
+}
+
+.purchase-record-form .quantity-record {
+  display: flex;
+  justify-content: space-between;
+}
+
+.purchase-record-form .form-control {
+  gap: 0 1rem;
+  margin-bottom: 0.7rem;
+}
+
+/* for record list */
+.purchase-record-container {
+  width: 100%;
+  width: 90vw;
+  max-width: var(--fixed-width);
+  margin: 0 auto;
+  margin-top: 1.2rem;
+  padding-bottom: 4rem;
+}
+
+.purchase-records {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.single-purchase-record {
+  display: flex;
+
+  padding: 0.5rem 1.0rem;
+  background: var(--white);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--shadow-2);
+  transition: var(--transition);
+  
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* flex width adjust */
+.purchase-date { flex: 2; }
+.item-name{ flex: 4; }
+.quantity-info { flex: 1.2; }
+.edit-btn { flex: 1; }
+
+.item-name, .quantity-info {
+  font-size: 0.9rem;
+}
+
+.quantity-purchased {
+  font-weight: bold;
+  color: var(--blue);
+}
+
+.edit-btn {
+  background: transparent;
+  border: transparent;
+  color: var(--green-dark);
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+/* 
+--------------
+Old settings 
+--------------
+*/
 
 /* Task Links */
 .task-links {

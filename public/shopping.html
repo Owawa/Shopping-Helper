@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>買い物記録</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+    <link rel="icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon.ico">
+</head>
+<body>
+    <form action="" class="purchase-record-form">
+        <h4>買い物の記録</h4>
+        <div class="form-control">
+            <label for="name">品目</label>
+            <select class="item-name-select">
+            </select>
+        </div>
+        <div class="form-control quantity-record">
+            <div>
+                <p><label for="qty-purchased">購入数</label></p>
+                <p><input type="number" step="1" min="1" id="qty-purchased"></p>
+            </div>
+            <div>
+                <p><label for="qty-remaining">残数</label></p>
+                <p><input type="number" step="1" min="1" id="qty-remaining"></p>
+            </div>
+        </div>
+        <div class="form-control">
+            <label for="">購入日付</label>
+            <i class="fa-solid fa-calendar-days" style="color: #001f55;"></i>
+            <input type="date">
+        </div>
+        <button type="submit" class="btn submit-btn">購入履歴を登録</button>
+        <div class="form-alert"></div>
+    </form>
+
+    <section class="purchase-record-container">
+        <div class="purchase-records"></div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="shopping.js"></script>
+</body>
+</html>

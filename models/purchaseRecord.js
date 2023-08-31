@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const purchaseRecordSchema = new mongoose.Schema({
-    ItemId: {
+    item: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Item',
         required: true,
