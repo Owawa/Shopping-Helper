@@ -16,4 +16,4 @@ https://stock.yadon.club/
  - インフラ
    - AWS
      - Route53
-     - LightSail (OS: Ubunt22.04.2 LTS)
+     - LightSail (OS: Ubuntu 22.04.2 LTS)
