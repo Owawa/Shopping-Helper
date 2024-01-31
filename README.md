@@ -9,7 +9,7 @@ https://stock.yadon.club/
 - フロントエンド
   - Native JavaScript
 - バックエンド
-  - NodeJS
+  - Node.js
   - Express.js
   - MongoDB
  

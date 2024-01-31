@@ -1,4 +1,6 @@
+const mongoose = require("mongoose");
 const PurchaseRecord = require("../models/purchaseRecord");
+const Item = require("../models/item");
 
 const getAllRawPurchaseRecords = async (req, res) => {
     try {
@@ -23,17 +25,51 @@ const getAllPurchaseRecords = async (req, res) => {
 };
 
 const createPurchaseRecord = async (req, res) => {
-    // If not specified, default date value is set to be current time
-    if(!req.body.purchasedDate) {
-        req.body.purchasedDate = new Date(); 
+
+    let createdPurchaseRecord = null;
+    // use transaction for modifying multiple data
+    const createHistoryAndIncreaseItemQty = async (requestBody) => {
+        const session = await mongoose.startSession();
+        try {
+            await session.withTransaction(async () => {
+                createdPurchaseRecord = await PurchaseRecord.create([requestBody], { session });
+                console.log(`record: ${createdPurchaseRecord}`)
+
+                const updateItem= await Item.findByIdAndUpdate(
+                    requestBody.item,
+                    { quantity: requestBody.quantityRemaining },
+                    {
+                        new: true,
+                        runValidators: true,
+                        session
+                    }
+                );
+                console.log(`item: ${updateItem}`);
+                if (!updateItem) {
+                    await session.abortTransaction();
+                    throw `specified id:${requestBody.item} not found.`;
+                }
+            })
+
+            await session.commitTransaction();
+        } catch (error) {
+            console.error("error has occured during transaction.");
+            // await session.abortTransaction(); // 現在は不要？
+            throw error;
+        } finally {
+            session.endSession();
+        }
     }
 
     try {
-        // model.create require 1 arg as obj like => {name: hoge}
-        const createPurchaseRecord = await PurchaseRecord.create(req.body);
-        res.status(200).json(createPurchaseRecord);
-    } catch (err) {
+        console.log("===== creating new purchase record... =====");
+        await createHistoryAndIncreaseItemQty(req.body);
+        res.status(200).json(...createdPurchaseRecord);
+        console.log("===== create record and increase item qty succeeded. =====");
+    } catch (err){
+        console.error(err);
         res.status(500).json(err);
+        console.log("===== create record and increase item qty failed. =====");
     }
 };
 
