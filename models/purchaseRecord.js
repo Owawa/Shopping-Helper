@@ -5,6 +5,12 @@ const purchaseRecordSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Item',
         required: true,
+        validate: {
+            validator: async function(itemId) {
+                return await mongoose.model("Item").exists({ _id: itemId });
+            },
+            message: function(props) { return `指定されたitem id(${props.value})は存在しません`; }
+        }
     },
     purchasedDate: {
         type: Date,
@@ -21,10 +27,13 @@ const purchaseRecordSchema = new mongoose.Schema({
         required: true,
         min: [1, "買い物後の残数として、1より小さな値を指定することはできません"],
         validate: {
-            validator: (value) => {
+            validator: function(value) {
                 return value >= this.quantityPurchased;
             },
-            message: "買い物後の残数として、購入個数より小さな値を指定することはできません"
+            message: function(props) {
+                return `買い物後の残数として、購入個数より小さな値を指定することはできません.`
+                    + `指定された値(${props.value})`;
+            }
         }
     }
 });
