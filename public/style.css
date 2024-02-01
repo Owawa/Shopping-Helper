@@ -280,11 +280,11 @@ textarea {
 }
 
 /*****
-  Purchase Records
+  History (formerly Purchase Records)
 *****/
 
-/* for record registration */
-.purchase-record-form {
+/* for history registration */
+.history-form {
   width: 90vw;
   max-width: var(--fixed-width);
   margin: 0 auto;
@@ -295,29 +295,29 @@ textarea {
   padding: 2rem 2.5rem;
 }
 
-.purchase-record-form h4 {
+.history-form h4 {
   font-size: 1.4rem;
   text-align: center;
   margin-bottom: 1rem;
 }
 
-.purchase-record-form label {
+.history-form label {
   display: block;
   width: 100%;
 }
 
-.purchase-record-form .quantity-record {
+.history-form .quantity-record {
   display: flex;
   justify-content: space-between;
 }
 
-.purchase-record-form .form-control {
+.history-form .form-control {
   gap: 0 1rem;
   margin-bottom: 0.7rem;
 }
 
-/* for record list */
-.purchase-record-container {
+/* for history list */
+.history-container {
   width: 100%;
   width: 90vw;
   max-width: var(--fixed-width);
@@ -326,14 +326,14 @@ textarea {
   padding-bottom: 4rem;
 }
 
-.purchase-records {
+.histories {
   display: flex;
   flex-flow: column;
   justify-content: space-between;
   gap: 1rem;
 }
 
-.single-purchase-record {
+.single-history {
   display: flex;
 
   padding: 0.5rem 1.0rem;

@@ -1,24 +1,24 @@
-const purchaseRecordsDOM = document.querySelector(".purchase-records");
-const purchaseRecordFormDOM = document.querySelector(".purchase-record-form");
+const historiesDOM = document.querySelector(".histories");
+const historyFormDOM = document.querySelector(".history-form");
 
 const itemNameSelectDOM = document.querySelector(".item-name-select");
 
-const showPurchaseRecords = async () => {
+const showHistories = async () => {
     try {
-        const { data: records }  = await axios.get("/api/v1/purchase");
+        const { data: histories }  = await axios.get("/api/v1/history");
 
-       // no records
-        if (records.length < 1) {
-            purchaseRecordsDOM.innerHTML = `<h5 class="emply-list">購入履歴が見つかりません.</h5>`;
+       // no history handle
+        if (histories.length < 1) {
+            historiesDOM.innerHTML = `<h5 class="emply-list">購入履歴が見つかりません.</h5>`;
             return;
         }
        
-        // output purchase records
-        const allRecords = records.map((record) => {
-            const {_id, item, purchasedDate, quantityPurchased, quantityRemaining} = record;
+        // output histories
+        const allHistories = histories.map((history) => {
+            const {_id, item, purchasedDate, quantityPurchased, quantityRemaining} = history;
             const dateString = new Date(purchasedDate).toLocaleDateString("ja");
             
-            return `<div class="single-purchase-record" data-id="${_id}">
+            return `<div class="single-history" data-id="${_id}">
                 <h5 class="purchase-date">${dateString}</h5>
                 <div class="item-name">${item.name}</div>
                 <div class="quantity-info">
@@ -30,7 +30,7 @@ const showPurchaseRecords = async () => {
                 </button>
             </div>`;
         }).join("");
-        purchaseRecordsDOM.innerHTML = allRecords;
+        historiesDOM.innerHTML = allHistories;
     } catch(err) {
         console.log(err);
     }
@@ -49,10 +49,9 @@ const setItemOptions = async () => {
     }
 }
 
-showPurchaseRecords();
+showHistories();
 setItemOptions();
 
-
-purchaseRecordFormDOM.addEventListener("submit", async (event) => {
+historyFormDOM.addEventListener("submit", async (event) => {
     event.preventDefault(); // prevent reload behavior
 });

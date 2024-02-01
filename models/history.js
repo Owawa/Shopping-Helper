@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const purchaseRecordSchema = new mongoose.Schema({
+const historySchema = new mongoose.Schema({
     item: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Item',
@@ -38,4 +38,4 @@ const purchaseRecordSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("PurchaseRecord", purchaseRecordSchema);
+module.exports = mongoose.model("History", historySchema);
