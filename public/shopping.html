@@ -18,24 +18,24 @@
     <form action="" class="history-form">
         <h4>買い物の記録</h4>
         <div class="form-control">
-            <label for="name">品目</label>
-            <select class="item-name-select">
+            <label for="item-name">品目</label>
+            <select class="item-name-select" id="item-name" required>
             </select>
         </div>
         <div class="form-control quantity-record">
             <div>
                 <p><label for="qty-purchased">購入数</label></p>
-                <p><input type="number" step="1" min="1" id="qty-purchased"></p>
+                <p><input type="number" step="1" min="1" id="qty-purchased" required></p>
             </div>
             <div>
                 <p><label for="qty-remaining">残数</label></p>
-                <p><input type="number" step="1" min="1" id="qty-remaining"></p>
+                <p><input type="number" step="1" min="1" id="qty-remaining" required></p>
             </div>
         </div>
         <div class="form-control">
-            <label for="">購入日付</label>
+            <label for="purchase-date">購入日付</label>
             <i class="fa-solid fa-calendar-days" style="color: #001f55;"></i>
-            <input type="date">
+            <input type="date" id="purchase-date" required>
         </div>
         <button type="submit" class="btn submit-btn">購入履歴を登録</button>
         <div class="form-alert"></div>

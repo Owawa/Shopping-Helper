@@ -2,6 +2,13 @@ const historiesDOM = document.querySelector(".histories");
 const historyFormDOM = document.querySelector(".history-form");
 
 const itemNameSelectDOM = document.querySelector(".item-name-select");
+const purchasedDOM = document.querySelector("#qty-purchased");
+const remainingDOM = document.querySelector("#qty-remaining");
+
+const formAlertDOM = document.querySelector(".form-alert");
+
+let selectedItemQty;
+let itemData;
 
 const showHistories = async () => {
     try {
@@ -14,7 +21,7 @@ const showHistories = async () => {
         }
        
         // output histories
-        const allHistories = histories.map((history) => {
+        const historyHTML = histories.map((history) => {
             const {_id, item, purchasedDate, quantityPurchased, quantityRemaining} = history;
             const dateString = new Date(purchasedDate).toLocaleDateString("ja");
             
@@ -30,28 +37,90 @@ const showHistories = async () => {
                 </button>
             </div>`;
         }).join("");
-        historiesDOM.innerHTML = allHistories;
+        historiesDOM.innerHTML = historyHTML;
     } catch(err) {
         console.log(err);
     }
 }
 
-const setItemOptions = async () => {
+const reloadItems = async () => {
     try {
-        const {data: items} = await axios.get("/api/v1/items");
-        const names = items.map( (item) => {
-            const { name } = item;
-            return `<option>${name}</option>`;
-        }).join("");
-        itemNameSelectDOM.innerHTML = `<option>-- Select item name ---</option>${names}`;
+        const res = await axios.get("/api/v1/items");
+        itemData = res.data;
     } catch(err) {
         console.log(err);
     }
 }
 
-showHistories();
-setItemOptions();
+const setSelectElm = () => {
+    const options = itemData.map( (item) => {
+        const { _id, name } = item;
+        return `<option value="${_id}">${name}</option>`;
+    }).join("");
+    itemNameSelectDOM.innerHTML = "<option value>-- 選択してください ---</option>" + options;
+
+    itemNameSelectDOM.addEventListener("change", (e) => {
+        const targetItemId = itemNameSelectDOM.selectedOptions[0].value;
+        if(targetItemId) {
+            const targetItem = itemData.find( (item) => {
+                return item._id === targetItemId;
+            });
+            selectedItemQty = targetItem.quantity;
+        }
+    });
+}
+
+const dataReload = async () => {
+    await reloadItems();
+    await showHistories();
+}
+
+const init = async () => {
+    await dataReload();
+    setSelectElm();
+}
+
+purchasedDOM.addEventListener("change", (e) => {
+    // set min attr to be equal to qty-purchased
+    remainingDOM.setAttribute("min", e.target.value);
+
+    // set default remaining value
+    const isItemSelected = itemNameSelectDOM.selectedIndex !== 0;
+    if(isItemSelected) {
+        remainingDOM.value = parseInt(purchasedDOM.value) + selectedItemQty;
+    }
+});
 
 historyFormDOM.addEventListener("submit", async (event) => {
-    event.preventDefault(); // prevent reload behavior
+    event.preventDefault();
+
+    const historyJSON = {
+        item: itemNameSelectDOM.selectedOptions[0].value,
+        quantityPurchased: purchasedDOM.value,
+        quantityRemaining: remainingDOM.value,
+        purchasedDate: new Date(
+            document.getElementById("purchase-date").value
+        ).toISOString()
+    };
+
+    try {
+        await axios.post("/api/v1/history", historyJSON);
+        dataReload();
+        historyFormDOM.reset();
+        formAlertDOM.style.display = "block";
+        formAlertDOM.textContent = "登録しました"
+        formAlertDOM.classList.add("text-success");
+    } catch(err) {
+        console.error(err);
+        formAlertDOM.style.display = "block";
+        formAlertDOM.textContent = "無効です. もう一度やり直してください.";        
+        formAlertDOM.classList.add("text-failed");
+    }
+    setTimeout(() => {
+        formAlertDOM.style.display = "none";
+        formAlertDOM.classList.remove("text-success");
+        formAlertDOM.classList.remove("text-failed");
+    }, 3000);
 });
+
+init();

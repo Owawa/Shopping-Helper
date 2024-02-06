@@ -397,12 +397,8 @@ Old settings
 }
 
 /*************
-    タスク編集
+    Item 編集
 *************/
-.task-edit-completed {
-  width: auto;
-}
-
 .single-item-form .form-alert {
   text-align: center;
   margin-top: 1rem;
@@ -429,6 +425,10 @@ Old settings
 
 .text-success {
   color: var(--green-dark);
+}
+
+.text-failed {
+  color: var(--red-dark);
 }
 
 .back-link {
