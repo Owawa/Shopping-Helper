@@ -78,6 +78,8 @@ const dataReload = async () => {
 const init = async () => {
     await dataReload();
     setSelectElm();
+    const today = new Date().toISOString().slice(0, 10);
+    document.getElementById("purchase-date").defaultValue = today;
 }
 
 purchasedDOM.addEventListener("change", (e) => {
