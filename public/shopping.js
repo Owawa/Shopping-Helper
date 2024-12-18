@@ -1,6 +1,7 @@
 const historiesDOM = document.querySelector(".histories");
 const historyFormDOM = document.querySelector(".history-form");
 
+const categoryDOM = document.querySelector(".item-category-select");
 const itemNameSelectDOM = document.querySelector(".item-name-select");
 const purchasedDOM = document.querySelector("#qty-purchased");
 const remainingDOM = document.querySelector("#qty-remaining");
@@ -52,22 +53,20 @@ const reloadItems = async () => {
     }
 }
 
-const setSelectElm = () => {
+const setCategory = () => {
+    let categories = ["--- カテゴリを選択 ---", "お掃除","お風呂", "スキンケア","ペーパー類","衛生用品","歯磨き","お洗濯","食料品"];
+    
+    categoryDOM.innerHTML = categories.map((c) => {
+        return `<option>${c}</option>`;
+    }).join("");
+}
+
+const setDefaultSelectElm = () => {
     const options = itemData.map( (item) => {
         const { _id, name } = item;
         return `<option value="${_id}">${name}</option>`;
     }).join("");
-    itemNameSelectDOM.innerHTML = "<option value>-- 選択してください ---</option>" + options;
-
-    itemNameSelectDOM.addEventListener("change", (e) => {
-        const targetItemId = itemNameSelectDOM.selectedOptions[0].value;
-        if(targetItemId) {
-            const targetItem = itemData.find( (item) => {
-                return item._id === targetItemId;
-            });
-            selectedItemQty = targetItem.quantity;
-        }
-    });
+    itemNameSelectDOM.innerHTML = "<option value>--- 品目を選択 ---</option>" + options;
 }
 
 const dataReload = async () => {
@@ -77,10 +76,35 @@ const dataReload = async () => {
 
 const init = async () => {
     await dataReload();
-    setSelectElm();
+    setCategory();
+    setDefaultSelectElm();
     const today = new Date().toISOString().slice(0, 10);
     document.getElementById("purchase-date").defaultValue = today;
 }
+
+categoryDOM.addEventListener("change", (e) => {
+    const isCategorySelected = categoryDOM.selectedIndex !== 0;
+    if(isCategorySelected) {
+        const itemsInCategory = itemData.filter((item) => item.category === categoryDOM.value)
+        .map((item) => {
+            const { _id, name } = item;
+            return `<option value="${_id}">${name}</option>`;
+        }).join("");
+        itemNameSelectDOM.innerHTML = "<option value>--- 品目を選択 ---</option>" + itemsInCategory;
+    } else {
+        setDefaultSelectElm();
+    }
+})
+
+itemNameSelectDOM.addEventListener("change", (e) => {
+    const targetItemId = itemNameSelectDOM.selectedOptions[0].value;
+    if(targetItemId) {
+        const targetItem = itemData.find( (item) => {
+            return item._id === targetItemId;
+        });
+        selectedItemQty = targetItem.quantity;
+    }
+});
 
 purchasedDOM.addEventListener("change", (e) => {
     // set min attr to be equal to qty-purchased

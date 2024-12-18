@@ -306,6 +306,11 @@ textarea {
   width: 100%;
 }
 
+.history-form .item-select {
+  display: flex;
+  justify-content: space-between;
+}
+
 .history-form .quantity-record {
   display: flex;
   justify-content: space-between;

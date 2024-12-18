@@ -17,10 +17,17 @@
 <body>
     <form action="" class="history-form">
         <h4>買い物の記録</h4>
-        <div class="form-control">
-            <label for="item-name">品目</label>
-            <select class="item-name-select" id="item-name" required>
-            </select>
+        <div class="form-control item-select">
+            <div>
+                <p><label for="item-category-select">カテゴリ</label></p>
+                <p><select class="item-category-select" id="item-category-select" value="hoge">
+                    <option>--- カテゴリを選択 ---</option>
+                </select></p>
+            </div>
+            <div>
+                <p><label for="item-name">品目</label></p>
+                <p><select class="item-name-select" id="item-name" required></select></p>
+            </div>
         </div>
         <div class="form-control quantity-record">
             <div>
@@ -33,8 +40,9 @@
             </div>
         </div>
         <div class="form-control">
-            <label for="purchase-date">購入日付</label>
-            <i class="fa-solid fa-calendar-days" style="color: #001f55;"></i>
+            <label for="purchase-date">購入日付
+                <i class="fa-solid fa-calendar-days" style="color: #001f55;"></i>
+            </label>
             <input type="date" id="purchase-date" required>
         </div>
         <button type="submit" class="btn submit-btn">購入履歴を登録</button>

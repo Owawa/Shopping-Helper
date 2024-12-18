@@ -7,6 +7,11 @@ const itemSchema = new mongoose.Schema({
     trim: true,
     unique: true,
   },
+  category: {
+    type: String,
+    required: [true, "カテゴリ名を入力してください"],
+    trim: true,
+  },
   quantity: {
     type: Number,
     required: true,
